@@ -1,0 +1,14 @@
+{
+  "name": "react-test",
+  "version": "1.0.0",
+  "description": "This is my test project",
+  "main": "index.html",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "Volodymir Pogorilyak",
+  "license": "MIT",
+  "devDependencies": {
+    "express": "^4.15.2"
+  }
+}
