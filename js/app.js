@@ -23,6 +23,20 @@ var newsCollection = [
 ];
 // newsCollection = [];
 
+var Article = React.createClass({
+    render: function () {
+        var title = this.props.data.title,
+            text = this.props.data.text;
+
+        return (
+            <article className="news__article">
+                <h3 className="article__title">{title}</h3>
+                <p className="article__text">{text}</p>
+            </article>
+        )
+    }
+});
+
 var News = React.createClass({
     render: function () {
         var data = this.props.data;
@@ -30,33 +44,23 @@ var News = React.createClass({
 
         if (data.length > 0) {
             newsTemplate = data.map(function (item, index) {
+
                 return (
-                    <article className="news__article" key={index}>
-                        <h3 className="article__title">{item.title}</h3>
-                        <p className="article__text">{item.text}</p>
-                    </article>
+                    <Article data={item}/>
                 )
             });
         } else {
-            newsTemplate = <p className="news__empty">No news for today</p>;
+            newsTemplate = <article className="news__article --is-empty">
+                <p>No news for today</p>
+            </article>;
         }
 
         return (
             <section className="news__section">
                 <h2>Last news</h2>
                 {newsTemplate}
-                <strong className={data.length > 0 ? '' : 'none'}>News amount: {data.length}</strong>
+                <strong className={'news__count' + (data.length > 0 ? '' : 'none')}>News amount: {data.length}</strong>
             </section>
-        );
-    }
-});
-
-var Comments = React.createClass({
-    render: function () {
-        return (
-            <aside className="news__comments">
-                No comments...
-            </aside>
         );
     }
 });
@@ -66,7 +70,6 @@ var App = React.createClass({
         return (
             <main className="news__section">
                 <News data={newsCollection}/>
-                <Comments />
             </main>
         );
     }
