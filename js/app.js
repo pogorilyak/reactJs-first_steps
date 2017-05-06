@@ -29,15 +29,18 @@ var Article = React.createClass({
             text = this.props.data.text;
 
         return (
-            <article className="news__article">
+            <div>
                 <h3 className="article__title">{title}</h3>
                 <p className="article__text">{text}</p>
-            </article>
+            </div>
         )
     }
 });
 
 var News = React.createClass({
+    propTypes: {
+        data: React.PropTypes.array.isRequired
+    },
     render: function () {
         var data = this.props.data;
         var newsTemplate;
@@ -46,7 +49,9 @@ var News = React.createClass({
             newsTemplate = data.map(function (item, index) {
 
                 return (
-                    <Article data={item}/>
+                    <article key={index} className="news__article">
+                        <Article data={item}/>
+                    </article>
                 )
             });
         } else {
@@ -57,7 +62,7 @@ var News = React.createClass({
 
         return (
             <section className="news__section">
-                <h2>Last news</h2>
+                <h2 className="section__title">Last news</h2>
                 {newsTemplate}
                 <strong className={'news__count' + (data.length > 0 ? '' : 'none')}>News amount: {data.length}</strong>
             </section>
@@ -69,7 +74,8 @@ var App = React.createClass({
     render: function () {
         return (
             <main className="news__section">
-                <News data={newsCollection}/>
+                {/*<News data={newsCollection}/>*/}
+                <News />
             </main>
         );
     }
