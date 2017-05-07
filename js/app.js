@@ -29,11 +29,21 @@ var newsCollection = [
     }
 ];
 var SearchInput = React.createClass({
+    getInitialState: function () {
+        return {
+            searchReq: ''
+        }
+    },
+    getSearchValue: function (e) {
+        this.setState({searchReq: e.target.value})
+    },
     render: function () {
         return (
             <div className="news__search">
                 <input type="text"
                        className="input__search"
+                       value={this.state.searchReq}
+                       onChange={this.getSearchValue}
                        placeholder="Search news"/>
             </div>
         )

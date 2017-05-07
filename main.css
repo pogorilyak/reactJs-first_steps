@@ -43,7 +43,7 @@ h1, h2, h3, h4, h5, p {
 .section__title {
   width: 100%;
   padding: 10px 0 15px;
-  margin: 20px;
+  margin: 0 20px 20px;
   color: #cfe7fd;
   font-family: "Playfair Display", serif;
   font-size: 36px;
@@ -51,14 +51,14 @@ h1, h2, h3, h4, h5, p {
   text-shadow: 1px 1px #68727b;
   text-align: center;
   text-transform: capitalize;
-  border-top: 2px solid rgba(207, 231, 253, 0.4);
   border-bottom: 2px solid rgba(207, 231, 253, 0.4);
   line-height: 1; }
 
 .news__section {
   display: flex;
   flex-wrap: wrap;
-  padding: 10px;
+  min-height: 100vh;
+  padding: 0 10px;
   background-color: #3E7DF2; }
 .news__article {
   flex-grow: 1;
@@ -75,8 +75,8 @@ h1, h2, h3, h4, h5, p {
       color: #000; }
 .news__count {
   width: 100%;
-  padding: 10px 0 14px;
-  margin: 20px;
+  padding: 10px 0;
+  margin: 20px 20px 0;
   color: #cfe7fd;
   font-family: "Playfair Display", serif;
   font-size: 20px;
@@ -85,7 +85,6 @@ h1, h2, h3, h4, h5, p {
   text-align: center;
   text-transform: capitalize;
   border-top: 2px solid rgba(207, 231, 253, 0.4);
-  border-bottom: 2px solid rgba(207, 231, 253, 0.4);
   line-height: 1; }
 
 .article__wrap {

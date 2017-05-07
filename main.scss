@@ -34,7 +34,7 @@ h1,h2,h3,h4,h5,p {
 .section__title {
   width: 100%;
   padding: 10px 0 15px;
-  margin: 20px;
+  margin: 0 20px 20px;
   color: #cfe7fd;
   font: {
     family: $playfair;
@@ -46,10 +46,7 @@ h1,h2,h3,h4,h5,p {
     align: center;
     transform: capitalize;
   }
-  border: {
-    top: 2px solid $section_title-color-border;
-    bottom: 2px solid $section_title-color-border;
-  }
+  border-bottom: 2px solid $section_title-color-border;
   line-height: 1;
 }
 .news {
@@ -57,7 +54,8 @@ h1,h2,h3,h4,h5,p {
   &__section {
     display: flex;
     flex-wrap: wrap;
-    padding: 10px;
+    min-height: 100vh;
+    padding: 0 10px;
     background-color: $section-color-bg;
   }
   &__article {
@@ -81,8 +79,8 @@ h1,h2,h3,h4,h5,p {
   }
   &__count {
     width: 100%;
-    padding: 10px 0 14px;
-    margin: 20px;
+    padding: 10px 0;
+    margin: 20px 20px 0;
     color: #cfe7fd;
     font: {
       family: $playfair;
@@ -94,10 +92,7 @@ h1,h2,h3,h4,h5,p {
       align: center;
       transform: capitalize;
     }
-    border: {
-      top: 2px solid $section_title-color-border;
-      bottom: 2px solid $section_title-color-border;
-    }
+    border-top: 2px solid $section_title-color-border;
     line-height: 1;
   }
 }
