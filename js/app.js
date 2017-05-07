@@ -1,38 +1,61 @@
 var newsCollection = [
     {
-        title: 'Aëtius',
-        text: 'Aëtius grew up in poverty or slavery.' +
-        'He later worked as a goldsmith in Antioch to support his widowed mother and studied philosophy. ' +
-        'After his mother died, Aëtius continued his trade and extended his studies into the Christian scriptures, ' +
-        'Christian theology, and medicine.'
+        title: 'Macron claims massive hack as emails leaked - media',
+        text: 'Leading French presidential candidate Emmanuel Macron\'s ' +
+        'campaign said on Friday it had been the target of a "massive"' +
+        ' computer hack that dumped its campaign emails online 1-1/2 days before' +
+        ' voters choose between the centrist and his far-right rival, ' +
+        'Marine Le Pen, according to Reuters',
+        time: '12:40, 06 May  2017',
+        tag: 'hacking'
     },
     {
-        title: 'Agapius',
-        text: 'Neoplatonist philosopher who lived in Athens. ' +
-        'He was a notable philosopher in the Neoplatonist school in Athens ' +
-        'when Marinus of Neapolis was scholarch after the death of Proclus.' +
-        ' He was admired for his love of learning and for putting forward difficult problems.'
+        title: 'Ukrainian MP who offered leasing Crimea to Russia stripped of citizenship',
+        text: 'Andriy Artemenko, the "back-door diplomat" who allegedly pitched a so-called plan to ' +
+        'resolve the conflict with Russia onto the desk of Trump\'s ' +
+        'national security adviser (at the time) Michael Flynn, has been deprived ' +
+        'of Ukrainian citizenship by a presidential decree, according to the State Migration Service.',
+        time: '19:10, 05 May  2017',
+        tag: 'citizenship'
     },
     {
-        title: 'Anaximander',
-        text: 'was a pre-Socratic Greek philosopher who lived in Miletus,' +
-        ' a city of Ionia. He belonged to the Milesian school and learned the teachings of his master Thales. ' +
-        'He succeeded Thales and became the second master of that school where he counted Anaximenes and, arguably, ' +
-        'Pythagoras amongst his pupils.'
+        title: 'WW2-era U.S.-made P40 Kittyhawk warcraft recovered from Black Sea at Kerch bridge construction site',
+        text: 'In the Kerch Strait, where the construction of Kerch bridge is underway to ' +
+        'connect the Russian-annexed Crimea with mainland Russia, ' +
+        'the floating crane crew managed to raise from the sea bottom an American P40 “Kittyhawk” ' +
+        'fighter jet that crashed into the sea at the times of World War 2, according to media reports.',
+        time: '14:40, 06 May  2017',
+        tag: 'BlackSea'
     }
 ];
-// newsCollection = [];
 
 var Article = React.createClass({
+    propTypes: {
+        data: React.PropTypes.shape({
+            title: React.PropTypes.string.isRequired,
+            text: React.PropTypes.string.isRequired,
+            time: React.PropTypes.string.isRequired
+        })
+    },
     render: function () {
         var title = this.props.data.title,
-            text = this.props.data.text;
+            text = this.props.data.text,
+            time = this.props.data.time,
+            tagName = this.props.data.tag;
 
         return (
-            <div>
-                <h3 className="article__title">{title}</h3>
-                <p className="article__text">{text}</p>
-            </div>
+            <article className="news__article">
+                <header className="article__header">
+                    <h3 className="article__title">{title}</h3>
+                </header>
+                <div className="article__content">
+                    <p className="article__text">{text}</p>
+                </div>
+                <footer className="article__footer">
+                    <time className="article__datetime">{time}</time>
+                    <span className="article__tag">{tagName}</span>
+                </footer>
+            </article>
         )
     }
 });
@@ -49,9 +72,9 @@ var News = React.createClass({
             newsTemplate = data.map(function (item, index) {
 
                 return (
-                    <article key={index} className="news__article">
+                    <div key={index} className="article__wrap">
                         <Article data={item}/>
-                    </article>
+                    </div>
                 )
             });
         } else {
@@ -62,7 +85,7 @@ var News = React.createClass({
 
         return (
             <section className="news__section">
-                <h2 className="section__title">Last news</h2>
+                <h2 className="section__title">React news app</h2>
                 {newsTemplate}
                 <strong className={'news__count' + (data.length > 0 ? '' : 'none')}>News amount: {data.length}</strong>
             </section>
@@ -74,8 +97,7 @@ var App = React.createClass({
     render: function () {
         return (
             <main className="news__section">
-                {/*<News data={newsCollection}/>*/}
-                <News />
+                <News data={newsCollection}/>
             </main>
         );
     }
