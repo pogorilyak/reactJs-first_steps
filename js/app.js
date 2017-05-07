@@ -28,7 +28,17 @@ var newsCollection = [
         tag: 'BlackSea'
     }
 ];
-
+var SearchInput = React.createClass({
+    render: function () {
+        return (
+            <div className="news__search">
+                <input type="text"
+                       className="input__search"
+                       placeholder="Search news"/>
+            </div>
+        )
+    }
+});
 var Article = React.createClass({
     propTypes: {
         data: React.PropTypes.shape({
@@ -37,11 +47,20 @@ var Article = React.createClass({
             time: React.PropTypes.string.isRequired
         })
     },
+    getInitialState: function () {
+        return {
+            visible: false
+        };
+    },
+    readmoreClick: function (e) {
+        this.setState({visible: true});
+    },
     render: function () {
         var title = this.props.data.title,
             text = this.props.data.text,
             time = this.props.data.time,
-            tagName = this.props.data.tag;
+            tagName = this.props.data.tag,
+            visible = this.state.visible;
 
         return (
             <article className="news__article">
@@ -49,7 +68,11 @@ var Article = React.createClass({
                     <h3 className="article__title">{title}</h3>
                 </header>
                 <div className="article__content">
-                    <p className="article__text">{text}</p>
+                    <button onClick={this.readmoreClick}
+                            className={'btn article__readmore' + (visible ? ' none' : '')}>
+                        Show article
+                    </button>
+                    <p className={'article__text' + (visible ? '' : ' none')}>{text}</p>
                 </div>
                 <footer className="article__footer">
                     <time className="article__datetime">{time}</time>
@@ -59,7 +82,6 @@ var Article = React.createClass({
         )
     }
 });
-
 var News = React.createClass({
     propTypes: {
         data: React.PropTypes.array.isRequired
@@ -72,7 +94,8 @@ var News = React.createClass({
             newsTemplate = data.map(function (item, index) {
 
                 return (
-                    <div key={index} className="article__wrap">
+                    <div key={index}
+                         className="article__wrap">
                         <Article data={item}/>
                     </div>
                 )
@@ -86,13 +109,15 @@ var News = React.createClass({
         return (
             <section className="news__section">
                 <h2 className="section__title">React news app</h2>
+                <SearchInput />
                 {newsTemplate}
-                <strong className={'news__count' + (data.length > 0 ? '' : 'none')}>News amount: {data.length}</strong>
+                <strong className={'news__count' + (data.length > 0 ? '' : 'none')}>
+                    News amount: {data.length}
+                </strong>
             </section>
         );
     }
 });
-
 var App = React.createClass({
     render: function () {
         return (
